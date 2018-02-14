@@ -9,7 +9,7 @@ before_script:
 
 script:
   - if [[ "$WITH_COVERAGE" == "true" ]]; then xdebug-enable; fi
-  - docker run --rm -v $PWD:/app phpqa/phpcs .
+ # - docker run --rm -v $PWD:/app phpqa/phpcs .
   - docker run --rm -v $PWD:/app phpqa/security-checker security:check
 
 deploy:
