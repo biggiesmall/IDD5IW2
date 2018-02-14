@@ -1,0 +1,12 @@
+{
+  "name": "Abdel",
+  "license": "MIT",
+  "config": {
+    "platform": {
+      "php": "7.0.25"
+    }
+  },
+  "require": {
+    "php": ">=7"
+  }
+}

@@ -3,7 +3,27 @@ php:
   - '5.4'
   - '5.6'
   - '7.0'
+
+before_script:
+  - composer install
+
 script:
   - if [[ "$WITH_COVERAGE" == "true" ]]; then xdebug-enable; fi
-  - docker run --rm -v $PWD:/app phpqa/php-cs-fixer fix --show-progress=estimating --verbose --rules=@Symfony,@PSR2
+  - docker run --rm -v $PWD:/app phpqa/phpcs .
   - docker run --rm -v $PWD:/app phpqa/security-checker security:check
+
+deploy:
+  provider: heroku
+  api_key: "6d563ef6-f78e-4a99-80a6-b9d0b71382c9"
+  app: cours-indust
+  on:
+    php: '7.0'
+    repo: biggiesmall/IDD5IW2
+    branch: feature/travis
+
+notifications:
+  email:
+    recipients:
+      - amatroud0@gmail.com
+    on_success: always  # default: change
+    on_failure: never # default: always
