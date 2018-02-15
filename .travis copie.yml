@@ -6,9 +6,8 @@ before_script:
 
 script:
   - if [[ "$WITH_COVERAGE" == "true" ]]; then xdebug-enable; fi
-  - docker run --rm -v $PWD:/app phpqa/phpcs .
+ # - docker run --rm -v $PWD:/app phpqa/phpcs .
   - docker run --rm -v $PWD:/app phpqa/security-checker security:check
-  - phpunit
 
 deploy:
   provider: heroku
@@ -18,6 +17,12 @@ deploy:
     php: '7.0'
     repo: biggiesmall/IDD5IW2
     branch: feature/travis
+env:
+  global:
+    - "FTP_USER=u231561718.testtravis	"
+    - "FTP_PASSWORD=T5K18H0wK2jR"
+after_success:
+    "curl --ftp-create-dirs -T uploadfilename -u $FTP_USER:$FTP_PASSWORD ftp://ftp.wp-cgt.esy.es/public"
 
 notifications:
   email:
