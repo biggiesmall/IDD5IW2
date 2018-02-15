@@ -10,19 +10,12 @@ script:
   - docker run --rm -v $PWD:/app phpqa/security-checker security:check
 
 deploy:
-  provider: heroku
-  api_key: "6d563ef6-f78e-4a99-80a6-b9d0b71382c9"
-  app: cours-indust
+  provider: script
+  skip_cleanup: true
+  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/<dir> u231561718@185.224.137.4:65002:public_html
   on:
-    php: '7.0'
     repo: biggiesmall/IDD5IW2
     branch: feature/travis
-env:
-  global:
-    - "FTP_USER=u231561718.testtravis	"
-    - "FTP_PASSWORD=T5K18H0wK2jR"
-after_success:
-    "curl --ftp-create-dirs -T uploadfilename -u $FTP_USER:$FTP_PASSWORD ftp://ftp.wp-cgt.esy.es/public"
 
 notifications:
   email:
