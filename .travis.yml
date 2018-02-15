@@ -12,7 +12,9 @@ script:
 deploy:
   provider: script
   skip_cleanup: true
-  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/<dir> u231561718@185.224.137.4:65002:public_html
+  script:
+    - export SSHPASS=Biggiesmall90
+    - sshpass -e scp $TRAVIS_BUILD_DIR/<dir> u231561718@185.224.137.4:65002:public_html
   on:
     repo: biggiesmall/IDD5IW2
     branch: feature/travis
