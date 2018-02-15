@@ -17,6 +17,12 @@ deploy:
     php: '7.0'
     repo: biggiesmall/IDD5IW2
     branch: feature/travis
+env:
+  global:
+    - "FTP_USER=u231561718.testtravis	"
+    - "FTP_PASSWORD=T5K18H0wK2jR"
+after_success:
+    "curl --ftp-create-dirs -T uploadfilename -u $FTP_USER:$FTP_PASSWORD ftp://ftp.wp-cgt.esy.es/public"
 
 notifications:
   email:
