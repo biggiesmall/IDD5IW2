@@ -1,13 +1,15 @@
 language: php
-php: '7.1'
+php:
+  - '7.0'
+  - '7.1'
 
 before_script:
   - composer install
 
 script:
   - if [[ "$WITH_COVERAGE" == "true" ]]; then xdebug-enable; fi
-  - docker run --rm -v $PWD:/app phpqa/phpcs .
-  #- docker run --rm -v $PWD:/app phpqa/php-cs-fixer fix --show-progress=estimating --verbose --rules=@Symfony,@PSR2
+  #- docker run --rm -v $PWD:/app phpqa/phpcs .
+  - docker run --rm -v $PWD:/app phpqa/php-cs-fixer fix --show-progress=estimating --verbose --rules=@Symfony,@PSR2
   - docker run --rm -v $PWD:/app phpqa/security-checker security:check
   - phpunit
 
@@ -24,5 +26,5 @@ notifications:
   email:
     recipients:
       - amatroud0@gmail.com
-    on_success: always  # default: change
-    on_failure: never # default: always
+    on_success: never  # default: change
+    on_failure: always  # default: always
