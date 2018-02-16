@@ -20,7 +20,7 @@ deploy:
   on:
     php: '7.1'
     repo: biggiesmall/IDD5IW2
-    branch: develop
+    branch: master
 
 notifications:
   email:
