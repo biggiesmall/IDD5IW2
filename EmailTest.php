@@ -3,8 +3,14 @@ declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Class EmailTest
+ */
 final class EmailTest extends TestCase
 {
+    /**
+     *
+     */
     public function testCanBeCreatedFromValidEmailAddress(): void
     {
         $this->assertInstanceOf(
@@ -13,6 +19,9 @@ final class EmailTest extends TestCase
         );
     }
 
+    /**
+     *
+     */
     public function testCannotBeCreatedFromInvalidEmailAddress(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -20,6 +29,9 @@ final class EmailTest extends TestCase
         Email::fromString('invalid');
     }
 
+    /**
+     *
+     */
     public function testCanBeUsedAsString(): void
     {
         $this->assertEquals(
