@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-
+require 'Email.php';
 use PHPUnit\Framework\TestCase;
 
 /**
